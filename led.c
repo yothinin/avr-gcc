@@ -4,12 +4,11 @@
 int main(void){
   //DDRD  = ~(1<<PD7); //PD7 as input
   DDRB  = 0xff;      //PB0-7 as output.
-  PORTB = 0xff;
 
   while (1){
     if(PIND & (1<<PIN7)){
       if  (PORTB == 0xff){
-        PORTB = 0xfe;
+        PORTB = (PORTB<<1);
         _delay_ms(100);
       }
       //PORTB = ~(~PORTB<<1);
