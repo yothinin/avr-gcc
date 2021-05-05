@@ -1,19 +1,24 @@
-#define F_CPU 8000000UL			/* Define frequency here its 8MHz */
 #include <avr/io.h>
 #include <util/delay.h>
 
-int main(){
-  DDRB  = 0xff; 	//Set all DDRB to output.
-  PORTB = 0xff;		//Set all PORTB to HIGH, LED's off.
-  DDRD  = 0Xfe;		//Set PIND7 to input
+int main(void){
+  //unsigned int i = 0;
+  //DDRD  = ~(1<<PD7); //PD7 as input
+  //PORTD = 0x00;
+  DDRB  = 0xff;      //PB0-7 as output.
+  PORTB = 0xff;
 
-  while(1){
-    if (PIND & (1<<PD7)){
-      PORTB &= ~(1<<PB0);	//11111111 & 11111110 = 11111110 -> On
-				//or PORTB = 0xfe;
+  while (1){
+    if(PIND & (1<<PIN7)){
+      if  (PORTB == 0xff){
+        PORTB = 0xfe;
+        _delay_ms(100);
+      }
+      PORTB = ~(~PORTB<<1);
+      _delay_ms(100);
     }else{
-      PORTB |= (1<<PB0);	//11111110 | 00000001 = 11111111 -> Off
-    				//or PORTB = 0xff;
+      PORTB = 0xff;
     }
   }
+  return 0;
 }
