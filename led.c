@@ -2,9 +2,7 @@
 #include <util/delay.h>
 
 int main(void){
-  //unsigned int i = 0;
   //DDRD  = ~(1<<PD7); //PD7 as input
-  //PORTD = 0x00;
   DDRB  = 0xff;      //PB0-7 as output.
   PORTB = 0xff;
 
@@ -14,7 +12,9 @@ int main(void){
         PORTB = 0xfe;
         _delay_ms(100);
       }
-      PORTB = ~(~PORTB<<1);
+      //PORTB = ~(~PORTB<<1);
+      //PORTB = (PORTB<<1)+1;
+      PORTB = (PORTB<<1)|0x01;
       _delay_ms(100);
     }else{
       PORTB = 0xff;
