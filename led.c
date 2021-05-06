@@ -2,12 +2,17 @@
 #include <util/delay.h>
 
 int main(void){
-  //DDRD  = ~(1<<PD7); //PD7 as input
+  DDRD  = 0x00;
+  PORTD = 0x00;
   DDRB  = 0xff;      //PB0-7 as output.
+  
+  int pind_status;
+  
 
   while (1){
-    if(PIND & (1<<PIN7)){
-      if  (PORTB == 0xff){
+    pind_status = PIND&(1<<PIN7);
+    if(pind_status == 0x80){ 
+      if (PORTB == 0xff){
         PORTB = (PORTB<<1);
         _delay_ms(100);
       }
