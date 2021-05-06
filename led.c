@@ -8,21 +8,23 @@ int main(void){
   
   int pind_status;
   
+  PORTB = 0xff;
 
   while (1){
     pind_status = PIND&(1<<PIN7);
-    if(pind_status == 0x80){ 
-      if (PORTB == 0xff){
-        PORTB = (PORTB<<1);
+    if(pind_status == 0x80){
+	  int i;
+	  for (i = 0; i<8; i++){
+        PORTB = ~(1<<i);
         _delay_ms(100);
-      }
-      //PORTB = ~(~PORTB<<1);
-      //PORTB = (PORTB<<1)+1;
-      PORTB = (PORTB<<1)|0x01;
-      _delay_ms(100);
+	  }
+	  for (i = 7; i>=0; i--){
+		PORTB = ~(1<<i);
+		_delay_ms(100);
+	  }
     }else{
-      PORTB = 0xff;
-    }
+	  PORTB = 0xff;
+	}
   }
   return 0;
 }
