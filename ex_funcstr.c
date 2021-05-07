@@ -14,8 +14,14 @@ char *print_bits(char *dest, int num){
 }
 
 int main(){
+  int i, num = 0xff;
+  
+  for (i = 0; i<8; i++){
+    num = (num == 0xff)?num<<1:num<<1|1;
     char dest[9] = "";
-	printf("bits = %s\n", print_bits(dest, 0xfe));
-	
-	return 0;
+	printf("%s\n", print_bits(dest, num));
+  }
+  
+  return 0;
 }
+
