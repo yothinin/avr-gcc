@@ -13,8 +13,8 @@ int main(void){
       PORTB = (PORTB == 0xff)?(PORTB <<1):(PORTB<<1)|1;          
       _delay_ms(50);        
     }else{
-	  PORTB = 0xff;
-	}
+      PORTB = 0xff;
+    }
   }
   
   return 0;
